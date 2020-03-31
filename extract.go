@@ -11,13 +11,13 @@ import (
 // Can't deal with length/width/height identification consistently
 // I will try to find 3 dimensions where d1 is the highest
 type Dimension struct {
-    d1 int
-    d2 int
-    d3 int
+    D1 int
+    D2 int
+    D3 int
 }
 
 func (d *Dimension) str() string {
-    return fmt.Sprintf("(%d / %d / %d )", d.d1, d.d2, d.d3)
+    return fmt.Sprintf("(%d / %d / %d )", d.D1, d.D2, d.D3)
 }
 
 func prepareAllRegexp() (*regexp.Regexp, *regexp.Regexp, *regexp.Regexp) {
@@ -57,11 +57,11 @@ func extractPrefixedDims(desc string) Dimension {
     sort.Slice(dims, func(i, j int) bool {
         return dims[i] > dims[j]
     })
-    d.d1 = dims[0]
+    d.D1 = dims[0]
     if len(dims) > 1 {
-        d.d2 = dims[1]
+        d.D2 = dims[1]
         if len(dims) > 2 {
-            d.d3 = dims[2]
+            d.D3 = dims[2]
         }
     }
     return d
@@ -85,10 +85,10 @@ func extractXedDims(desc string) Dimension {
         sort.Slice(ints, func(i, j int) bool {
             return ints[i] > ints[j]
         })
-        d.d1 = ints[0]
-        d.d2 = ints[1]
+        d.D1 = ints[0]
+        d.D2 = ints[1]
         if len(ints) > 2 {
-            d.d3 = ints[2]
+            d.D3 = ints[2]
         }
     }
     return d
@@ -102,7 +102,7 @@ func extractOneDim(desc string) Dimension {
     if len(matchs) == 0 {
         return d
     }
-    d.d1, _ = strconv.Atoi(matchs[1])
+    d.D1, _ = strconv.Atoi(matchs[1])
     return d
 }
 
@@ -110,12 +110,12 @@ func ExtractDims(desc string) (Dimension, error) {
 
     d := extractXedDims(desc)
 
-    if d.d1 != 0 {
+    if d.D1 != 0 {
         return d, nil
     }
 
     d = extractPrefixedDims(desc)
-    if d.d1 != 0 {
+    if d.D1 != 0 {
         return d, nil
     }
 

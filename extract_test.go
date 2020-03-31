@@ -17,7 +17,7 @@ func (t *TestCase) str() string {
 }
 
 func (t *TestCase) equal(d *Dimension) bool {
-    return (t.d1 == d.d1) && (t.d2 == d.d2) && (t.d3 == d.d3)
+    return (t.d1 == d.D1) && (t.d2 == d.D2) && (t.d3 == d.D3)
 }
 
 func doTest(t *testing.T, testCases []TestCase) {
